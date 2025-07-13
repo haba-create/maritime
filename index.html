@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marlink Data Architecture Hub</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #00a8e8;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: #495057;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .phase {
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .task-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .output-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+        .output-link:hover {
+            text-decoration: underline;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 5px 0;
+        }
+
+        .card a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-progress {
+            background-color: var(--warning-color);
+            color: #333;
+        }
+
+        .status-not-started {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .status-complete {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .quick-link {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .quick-link:hover {
+            background: #0052a3;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Marlink Data Architecture Documentation Hub</h1>
+            <p class="subtitle">Migration from Azure Databricks to Snowflake</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>🎯 Current Priority: Customer Domain Assessment</h2>
+            
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                <strong>Project Context:</strong>
+                <ul style="margin-top: 10px; list-style-position: inside;">
+                    <li><strong>Objective:</strong> Assess effort required for customer data cleanse/harmonization</li>
+                    <li><strong>Stakeholders:</strong> Stephen (Data Architect), Silamir, Dipesh, Reem, Group IT</li>
+                    <li><strong>Target Platform:</strong> Snowflake (migrating from Azure Databricks)</li>
+                </ul>
+            </div>
+
+            <h3>Assessment Framework</h3>
+
+            <div class="phase">
+                <h4>Phase 1: Discovery & Analysis</h4>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>1.1 Source System Inventory</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Document all customer data sources requiring harmonization</li>
+                            <li>Identify data formats, volumes, and update frequencies</li>
+                            <li>Map current data flows and dependencies</li>
+                        </ul>
+                        <em class="output-link">Output: Source Systems Catalog</em>
+                    </li>
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>1.2 Current State Assessment</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Analyze existing data quality issues</li>
+                            <li>Document current ETL processes in Azure Databricks</li>
+                            <li>Identify technical debt and pain points</li>
+                        </ul>
+                        <em class="output-link">Output: Current State Analysis</em>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 2: Target Design</h4>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>2.1 Data Quality Rules Definition</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Define customer data quality standards</li>
+                            <li>Create validation rules and thresholds</li>
+                            <li>Establish data governance policies</li>
+                        </ul>
+                        <em class="output-link">Output: Data Quality Framework</em>
+                    </li>
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>2.2 Target Schema Design</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Design unified customer schema for CRM processes</li>
+                            <li>Define data model for Snowflake</li>
+                            <li>Create mapping specifications</li>
+                        </ul>
+                        <em class="output-link">Output: Target Schema Documentation</em>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 3: Solution Architecture</h4>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>3.1 ETL/ELT Design</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Document data cleansing processes</li>
+                            <li>Design harmonization workflows</li>
+                            <li>Define interim solution architecture</li>
+                        </ul>
+                        <em class="output-link">Output: ETL Architecture</em>
+                    </li>
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>3.2 CRM Integration Design</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Define integration patterns with CRM</li>
+                            <li>Specify data refresh frequencies</li>
+                            <li>Document API/interface requirements</li>
+                        </ul>
+                        <em class="output-link">Output: Integration Specifications</em>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 4: Effort Estimation</h4>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>4.1 Implementation Roadmap</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Break down work into sprints/phases</li>
+                            <li>Identify resource requirements</li>
+                            <li>Define milestones and dependencies</li>
+                        </ul>
+                        <em class="output-link">Output: Implementation Roadmap</em>
+                    </li>
+                    <li class="task-item">
+                        <span class="checkbox"></span>
+                        <strong>4.2 Effort Estimate</strong>
+                        <ul style="margin-left: 30px; margin-top: 5px; list-style: disc;">
+                            <li>Provide detailed effort breakdown</li>
+                            <li>Include build, test, and deployment estimates</li>
+                            <li>Factor in operational support needs</li>
+                        </ul>
+                        <em class="output-link">Output: Effort Estimation Document</em>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📚 Documentation Resources</h2>
+            <div class="grid">
+                <div class="card">
+                    <h4>Assessment Documents</h4>
+                    <ul>
+                        <li><a href="./templates/assessment-template.md">Assessment Template</a></li>
+                        <li><a href="./templates/source-system-template.md">Source System Profile</a></li>
+                        <li><a href="./templates/dq-rule-template.md">Data Quality Rule Template</a></li>
+                        <li><a href="./templates/integration-template.md">Integration Design Template</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Technical Documents</h4>
+                    <ul>
+                        <li><a href="./templates/etl-pattern-template.md">ETL Design Pattern</a></li>
+                        <li><a href="./templates/schema-template.md">Schema Documentation</a></li>
+                        <li><a href="./templates/estimation-template.md">Effort Estimation Framework</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔬 Proof of Concepts (POCs)</h2>
+            <div class="grid">
+                <div class="card">
+                    <h4>Snowflake Data Ingestion Pipeline</h4>
+                    <ul>
+                        <li>Source system connectivity tests</li>
+                        <li>Data loading performance benchmarks</li>
+                        <li>Cost optimization strategies</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Data Quality Framework</h4>
+                    <ul>
+                        <li>Automated data profiling</li>
+                        <li>Quality rule implementation</li>
+                        <li>Exception handling workflows</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>CRM Integration Prototype</h4>
+                    <ul>
+                        <li>Real-time vs batch integration patterns</li>
+                        <li>API performance testing</li>
+                        <li>Data synchronization mechanisms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Deliverables Tracker</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Deliverable</th>
+                        <th>Status</th>
+                        <th>Owner</th>
+                        <th>Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Customer Domain Assessment</td>
+                        <td><span class="status-badge status-progress">In Progress</span></td>
+                        <td>Stephen</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td>Source Systems Catalog</td>
+                        <td><span class="status-badge status-not-started">Not Started</span></td>
+                        <td>Stephen/Silamir</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td>Data Quality Rules</td>
+                        <td><span class="status-badge status-not-started">Not Started</span></td>
+                        <td>Silamir/Business</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td>Target Schema</td>
+                        <td><span class="status-badge status-not-started">Not Started</span></td>
+                        <td>Silamir</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td>ETL Design Document</td>
+                        <td><span class="status-badge status-not-started">Not Started</span></td>
+                        <td>Stephen</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td>CRM Integration Spec</td>
+                        <td><span class="status-badge status-not-started">Not Started</span></td>
+                        <td>Silamir</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td>Effort Estimate</td>
+                        <td><span class="status-badge status-not-started">Not Started</span></td>
+                        <td>Stephen</td>
+                        <td>TBD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🔗 Quick Links</h2>
+            <div class="quick-links">
+                <a href="./guides/snowflake-migration.md" class="quick-link">Snowflake Migration Guide</a>
+                <a href="./guides/databricks-sunset.md" class="quick-link">Azure Databricks Sunset Plan</a>
+                <a href="./guides/data-governance.md" class="quick-link">Data Governance Standards</a>
+                <a href="./team-contacts.md" class="quick-link">Team Contacts</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Maintained by: Stephen - Data Architect | Last Updated: <span id="lastUpdated"></span></p>
+    </footer>
+
+    <script>
+        // Set last updated date
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString();
+        
+        // Add interactive checkboxes
+        document.querySelectorAll('.checkbox').forEach(checkbox => {
+            checkbox.style.cursor = 'pointer';
+            checkbox.addEventListener('click', function() {
+                if (this.innerHTML === '') {
+                    this.innerHTML = '✓';
+                    this.style.backgroundColor = '#28a745';
+                    this.style.color = 'white';
+                } else {
+                    this.innerHTML = '';
+                    this.style.backgroundColor = 'transparent';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
